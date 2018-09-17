@@ -1,0 +1,37 @@
+{% extends 'codintalk/base.html' %}
+
+
+{% block title %} Login {% endblock %}
+
+{% block content%}
+<div class="col-12">
+    <form class="form-horizontal login_form" method="post" action="."> {% csrf_token %}
+        <input type="hidden" name="next" value="/">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Identifiez vous !</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Nom d'utilisateur</label>
+                {{form.username}}
+            </div>
+
+            <!-- Password input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
+                {{form.password}}
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                    <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

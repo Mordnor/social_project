@@ -1,0 +1,44 @@
+{% extends 'codintalk/base.html' %}
+
+
+
+{% block title %} article_list {% endblock %}
+
+
+{% block content%}
+<div class="col-12 mb-3">
+    <article>
+        <img class="img-fluid" src="/{{profile.cover.url}}" alt="image_article">
+        <h2>{{profile.user.username}}</h2>
+        <p>{{profile.user.email}}</p>
+        {% if request.user == profile.user %}
+        <a href="{% url 'profile-edit' request.user.username %}">Edit</a>
+        {% else %}
+        {% if user.profile in profile.friends.all %}
+        <button type="submit"> <i class="fas fa-user-minus"></i></i></button>
+
+
+        {% else %}
+        <form action="{% url 'profile-add-friend' request.user.username %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="friend_id" value="{{profile.id}}">
+            <button type="submit"><i class="fas fa-user-plus"></i></button>
+        </form>
+        {% endif %}
+        {% endif %}
+    </article>
+</div>
+
+<div class="col-12">
+    <h2 class="w-100">Amis</h2>
+    <ul class="friend-list">
+    
+    
+        {% for friend in profile.friends.all %}
+        <li><a href="{% url 'profile-detail' friend.user.username %}"><img class="img-fluid" src="/{{friend.cover.url}}">{{friend.user.first_name}}
+                {{friend.user.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

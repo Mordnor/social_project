@@ -1,0 +1,29 @@
+header{
+    background-color: lightcoral;
+    text-align: center;
+}
+
+h1{
+    font-size: 8rem;
+    line-height: 2;
+}
+
+.form-inline .custom-select,
+.form-inline .input-group{
+    width: 80%;
+}
+
+.friend-list{
+    width: 50%;
+    list-style: none;
+}
+
+.friend-list img{
+    width: 15%;
+    height: auto;
+    margin-right: 1rem;
+}
+
+.friend-list li {
+    margin-bottom: 1rem;
+}

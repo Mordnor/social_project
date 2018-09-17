@@ -1,0 +1,41 @@
+{% extends 'codintalk/base.html' %}
+
+
+
+{% block title %} article_list {% endblock %}
+
+
+{% block content%}
+<div class="col-12 col-md-9 p-1">
+    <div class="row">
+        {% for profile in profile_list %}
+        <div class="col-12 col-md-4">
+            <article class="m-2">
+                <a href="{% url 'profile-detail' profile.slug %}">
+                    <div class="card">
+                        <img class="card-img-top" src="/{{profile.cover.url}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ profile.user.username}}</h5>
+                            <p class="card-text">{{profile.user.email}}</p>
+                            <p class="card-text">{{profile.friends.first}}</p>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-12 col-md-3 p-3">
+    <aside>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'profile-list' %}" method="get">
+            <div class="input-group">
+                <input class="form-control" name="q" type="search" placeholder="Search">
+            </div>
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-secondary">go</button>
+            </span>
+        </form>
+    </aside>
+</div>
+{% endblock %}

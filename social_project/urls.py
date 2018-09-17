@@ -14,8 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.conf import settings
 from django.contrib import admin
+from django.conf.urls.static import static
+from codintalk.views import IndexView, ProfileDetailView, ProfileUpdateView, ProfileAddFriend
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+
+    url(r'^$', IndexView.as_view(), name='profile-list'),
+
+    url(r'^login/$', auth_views.LoginView.as_view()),
+
+    url(r'^logout/$', auth_views.LogoutView.as_view(next_page='/')),
+
+    url(r'^profile/(?P<slug>[-\w]+)/$', ProfileDetailView.as_view(), name='profile-detail'),
+
+    url(r'^p/(?P<username>[-\w]+)/add/friend/$', ProfileAddFriend.as_view(), name='profile-add-friend'),
+
+
+    url(r'^update/(?P<username>[-\w]+)/$', ProfileUpdateView.as_view(), name='profile-edit'),
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
